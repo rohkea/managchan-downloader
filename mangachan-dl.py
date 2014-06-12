@@ -55,18 +55,18 @@ class mangachan:
                                          epilog='It is not recommended to use -f or -s arguments if you need more than 1 URL')
         parser.add_argument('urls', metavar='MANGACHAN_URL', nargs='+',
                             help="URL(s) to Mangachan.ru/Yaoichan.ru chapter page")
-        parser.add_argument('-f', dest='folder', nargs=1, default=None,
+        parser.add_argument('-f', dest='folder', nargs=1, default=[None],
                             help='folder where files will be saved (omit it to use default)')
-        parser.add_argument('-s', dest='skip', nargs=1, default=0, type=int,
+        parser.add_argument('-s', dest='skip', nargs=1, default=[0], type=int,
                             help='how many files should be skipped from the beginnng (default: 0)')
-        parser.add_argument('-t', dest='maxtimeout', nargs=1, default=1.5, type=float,
+        parser.add_argument('-t', dest='maxtimeout', nargs=1, default=[1.5], type=float,
                             help='maximal timeout (real timeout will be a random value from 0 to maximal timeout; default: 1.5)')
         args_namespace = parser.parse_args()
         if args_namespace:
             args = vars(args_namespace)
             for url in args['urls']:
                 print("Loading manga chapter from URL '{}'".format(url))
-                mangachan.download(url, args['folder'], args['skip'], args['maxtimeout'])
+                mangachan.download(url, args['folder'][0], args['skip'][0], args['maxtimeout'][0])
     
 if __name__ == '__main__':
     mangachan.main()
